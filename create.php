@@ -26,7 +26,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'){
             break;
         }
 
-        //add new client to database
+        //add new projet to database
         $sql = "INSERT INTO projet (code,nom,description,budget)" . 
         "VALUES ('".$code."','". $nom. "', '".$description."' , '" .$budget. "' ) ";
         $result = $connection->query($sql);
