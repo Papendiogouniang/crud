@@ -9,7 +9,7 @@
 <body>
      <div class="container my-5">
           <h2>liste des projets</h2>
-          <a href="btn btn-primary" href="/niangshop/create.php" role="button">New projet</a>
+          <a href="btn btn-primary" href="/crud/create.php" role="button">New projet</a>
           <br>
           <table class="table">
             <thead>
