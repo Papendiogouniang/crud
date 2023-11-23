@@ -15,7 +15,7 @@ $description = "";
 $budget = "";
 
 if ( $_SERVER['REQUEST_METHOD'] == 'GET'){
-    //GET methode: Show the data of the client
+    //GET methode: Show the data of the projet
 
     if ( !isset($_GET["id"])){
         header("location: /crud/index.php");
@@ -24,7 +24,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'GET'){
     $id = $_GET["id"];
 
      
-    // read the row of the selected client from database table
+    // read the row of the selected projet from database table
 
     $sql = " SELECT * FROM projet WHERE id=$id";
     $result = $connection->query($sql);
