@@ -2,24 +2,23 @@
 $servername= "localhost";
 $username = "root";
 $password ="";  
-$database="niangshop";
+$database="crud";
 //Create connection
 $connection = new mysqli($servername, $username, $password, $database);
 
 
 
 
-$id="";
-$name="";
-$email="";
-$phone="";
-$address="";
+$code = "";
+$nom = "";
+$description = "";
+$budget = "";
 
 if ( $_SERVER['REQUEST_METHOD'] == 'GET'){
     //GET methode: Show the data of the client
 
     if ( !isset($_GET["id"])){
-        header("location: /niangshop/index.php");
+        header("location: /crud/index.php");
         exit;
     }
     $id = $_GET["id"];
@@ -27,35 +26,35 @@ if ( $_SERVER['REQUEST_METHOD'] == 'GET'){
      
     // read the row of the selected client from database table
 
-    $sql = " SELECT * FROM clients WHERE id=$id";
+    $sql = " SELECT * FROM projet WHERE id=$id";
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
 
     if (!$row){
-        header("locaction: /niangshop/index");
+        header("locaction: /crud/index");
         exit;
     }
-    $name =$_POST["name"];
-    $email =$_POST["email"];
-    $phone =$_POST["phone"];
-    $address =$_POST["address"];
+    $code =$_POST["code"];
+    $nom =$_POST["nom"];
+    $description =$_POST["description"];
+    $budget =$_POST["budget"];
 }
 else{
     //POST method : update or insert a new record in database
     $id =$_POST["id"];
-    $name =$_POST["name"];
-    $email =$_POST["email"];
-    $phone =$_POST["phone"];
-    $address =$_POST["address"];
+    $code =$_POST["code"];
+    $nom =$_POST["nom"];
+    $description =$_POST["description"];
+    $budget =$_POST["budget"];
 
     do{
-        if(empty($id) || empty($name) || empty($email) || empty($phone) || empty($address)){
-            $errorMessage="All the fields are required";
+        if (empty($code) || empty($nom) || empty($description) || empty($budget)) {
+            $errorMessage = "All the fields are required";
             break;
         }
 
-        $sql = "UPDATE clients" .
-        "SET name ='$name' , email='$email', phone='$phone' , address = '$address'". 
+        $sql = "UPDATE projet" .
+        "SET code ='$code' , nom='$nom', description='$description' , budget = '$budget'". 
         "WHERE id = $id";
 
 
@@ -66,9 +65,9 @@ else{
             break;
         }
 
-        $successMessage="Client updated correctly";
+        $successMessage="Projet updated correctly";
 
-        header("location: /niangshop/index.php");
+        header("location: crud/index.php");
         exit;
 
 
@@ -82,13 +81,13 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niang shop</title>
+    <title>Projet</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <div class="container my-5">
-        <h2>New client</h2>
+        <h2>New projet</h2>
 
          <?php
          if (!empty($errorMessage)){
@@ -104,36 +103,36 @@ else{
         <form method="post">
             <input type="hidden" value="<?php echo $id; ?>">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Name</label>
+                <label class="col-sm-3 col-form-label">Code</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>">
+                    <input type="number" class="form-control" name="code" value="<?php echo $code; ?>">
 
                 </div>
 
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Email</label>
+                <label class="col-sm-3 col-form-label">Nom</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="email" value="<?php echo $email; ?>">
+                    <input type="text" class="form-control" name="nom" value="<?php echo $nom; ?>">
 
                 </div>
 
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Phone</label>
+                <label class="col-sm-3 col-form-label">Description</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="phone" value="<?php echo $phone; ?>">
+                    <input type="text" class="form-control" name="description" value="<?php echo $description; ?>">
 
                 </div>
 
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Address</label>
+                <label class="col-sm-3 col-form-label">Budget</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="address" value="<?php echo $address; ?>">
+                    <input type="number" class="form-control" name="budget" value="<?php echo $budget; ?>">
 
                 </div>
 
@@ -162,7 +161,7 @@ else{
 
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/niangshop/index.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="crud/index.php" role="button">Cancel</a>
 
                 </div>
 
